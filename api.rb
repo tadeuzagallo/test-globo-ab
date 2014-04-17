@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'sinatra/activerecord'
 
-set :database, 'sqlite3:db/development.sqlite3'
+set :database, { adapter: 'sqlite3', database: 'db/development.sqlite3' }
 
 get '/' do
   'Hello World!'
