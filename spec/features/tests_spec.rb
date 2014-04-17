@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe 'API', type: :feature do
   include Rack::Test::Methods
   
