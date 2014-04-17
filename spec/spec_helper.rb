@@ -5,10 +5,18 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+  ENV['RACK_ENV'] = 'test'
+
   $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..'))
   $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'app', 'models'))
+
   require 'api'
+  require 'rspec'
   require 'shoulda/matchers'
+  require 'capybara/rspec'
+  require 'rack/test'
+
+  Capybara.app = Sinatra::Application
 
   config.treat_symbols_as_metadata_keys_with_true_values = true
   config.run_all_when_everything_filtered = true
