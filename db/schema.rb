@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140417185112) do
+ActiveRecord::Schema.define(version: 20140417185503) do
 
   create_table "choices", force: true do |t|
     t.string   "url"
@@ -25,5 +25,15 @@ ActiveRecord::Schema.define(version: 20140417185112) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "users_choices", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "test_id"
+    t.integer  "choice_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users_choices", ["user_id", "test_id"], name: "index_users_choices_on_user_id_and_test_id", unique: true
 
 end
