@@ -1,6 +1,8 @@
 require 'sinatra'
-require_relative 'config/initialize'
+require 'sinatra/activerecord'
 
-post '/' do
+set :database, 'sqlite://db/development.sqlite3'
+
+get '/' do
   'Hello World!'
 end
