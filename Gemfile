@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'sinatra'
-gem 'activerecord'
+gem 'activerecord', '~> 4.0.4'
 gem 'sinatra-activerecord'
 
 group :development do
