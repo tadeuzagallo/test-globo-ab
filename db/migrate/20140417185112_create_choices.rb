@@ -3,7 +3,7 @@ class CreateChoices < ActiveRecord::Migration
     create_table(:choices) do |t|
       t.string :url
       t.integer :weight
-      t.references :tests
+      t.references :test
 
       t.timestamps
     end

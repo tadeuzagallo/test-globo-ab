@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20140417185503) do
   create_table "choices", force: true do |t|
     t.string   "url"
     t.integer  "weight"
-    t.integer  "tests_id"
+    t.integer  "test_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
