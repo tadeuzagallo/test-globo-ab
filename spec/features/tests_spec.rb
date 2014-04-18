@@ -10,7 +10,7 @@ describe 'API', type: :feature do
   before(:all) { Test.destroy_all }
   
   it 'should create a new feature' do
-    expect { post '/ab/feature_name', choices: [{ url: 'foo' }] }.to change { Test.count() }.by(1)
+    expect { post '/ab/feature_name', choices: [{ url: 'foo' }, { url: 'bar' }] }.to change { Test.count() }.by(1)
   end
 
   it 'should create '
