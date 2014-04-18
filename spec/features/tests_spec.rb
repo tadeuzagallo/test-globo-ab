@@ -10,8 +10,8 @@ describe 'API', type: :feature do
   before(:all) { Test.destroy_all }
   
   it 'should create a new feature' do
-    choices = { choices: [{ url: 'foo', weight: 1 },
-                        { url: 'bar', weight: 1 }] }
+    choices = { choices: [{ url: 'http://foo.com', weight: 1 },
+                        { url: 'http://bar.com', weight: 1 }] }
     expect { post '/ab/feature_name', choices }.to change { Test.count() }.by(1)
   end
 
