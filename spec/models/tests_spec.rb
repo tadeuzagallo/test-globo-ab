@@ -7,14 +7,15 @@ describe(Test) do
 
   it 'should validate 2 choices' do
     test = Test.new(name: 'foo')
+    choice = { url: 'foo', weight: 1 }
 
-    test.choices.build(url: 'bar')
+    test.choices.build(choice)
     test.valid?.should be_false
 
-    test.choices.build(url: 'baz')
+    test.choices.build(choice)
     test.valid?.should be_true
 
-    test.choices.build(url: 'blz')
+    test.choices.build(choice)
     test.valid?.should be_false
   end
 end
