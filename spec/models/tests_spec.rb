@@ -6,16 +6,7 @@ describe(Test) do
   it { should validate_presence_of :choices }
 
   it 'should validate 2 choices' do
-    test = Test.new(name: 'foo')
-    choice = { url: 'foo', weight: 1 }
-
-    test.choices.build(choice)
-    test.valid?.should be_false
-
-    test.choices.build(choice)
-    test.valid?.should be_true
-
-    test.choices.build(choice)
-    test.valid?.should be_false
+    test = Test.create(name: 'foo')
+    test.errors.messages[:choices].should include('is the wrong length (should be 2 characters)')
   end
 end
