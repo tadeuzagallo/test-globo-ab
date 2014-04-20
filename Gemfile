@@ -7,6 +7,8 @@ gem 'sinatra-activerecord'
 group :development do
   gem 'sqlite3'
   gem 'sinatra-reloader'
+  gem 'guard'
+  gem 'guard-rspec'
 end
 
 group :development, :test do
