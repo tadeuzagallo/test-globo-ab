@@ -9,6 +9,8 @@ describe(UserChoice) do
   let(:choice1) { Choice.create(url: 'http://google.com', weight: 2)}
   let(:choice2) { Choice.create(url: 'http://yahoo.com', weight: 1)}
 
+  before(:all) { UserChoice.destroy_all }
+
   it 'should validate uniqueness of choice for a given user' do
     choice = UserChoice.create({ user_id: 1, choice: choice1 })
     choice.should be_valid
