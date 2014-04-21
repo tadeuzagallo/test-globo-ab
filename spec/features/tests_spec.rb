@@ -20,4 +20,10 @@ describe 'API', type: :feature do
     test = FactoryGirl.create(:test)
     expect { get "/ab/#{test.name}/1" }.to change { UserChoice.count() }.by(1)
   end
+
+  it 'should save an user\'s choice' do
+    test = FactoryGirl.create(:test)
+    expect { get "/ab/#{test.name}/1" }.to change { UserChoice.count() }.by(1)
+    expect { get "/ab/#{test.name}/1" }.to change { UserChoice.count() }.by(0)
+  end
 end
