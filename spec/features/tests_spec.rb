@@ -18,7 +18,7 @@ describe 'API', type: :feature do
 
   context 'get /ab/:feature_name/:user_id' do
     before do
-      @test = FactoryGirl.create(:test)
+      @test = FactoryGirl.create(:test, :with_choices)
     end
 
     it 'should create an user\'s choice'  do
