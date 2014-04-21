@@ -1,9 +1,12 @@
 require 'sinatra'
 require 'sinatra/activerecord'
+require 'sinatra/json'
+require 'sinatra/reloader' if development?
 
 $LOAD_PATH.concat(%w{./app/models ./app/serializers})
 
 require 'test'
+require 'user_choice_serializer'
 
 set :database, { adapter: 'sqlite3', database: 'db/development.sqlite3' }
 
@@ -15,6 +18,17 @@ end
 
 get '/ab/:feature_name/:user_id' do |feature_name, user_id|
   test = Test.includes(:choices).find_by(name: feature_name)
-  test.users_choices.find_by(user_id: user_id) ||
-  test.choose_for_user(user_id)
+  if test.present?
+    user_choice = test.users_choices.find_by(user_id: user_id) ||
+    test.choose_for_user(user_id)
+
+    json UserChoiceSerializer.new(user_choice, root: nil)
+  else
+    json_halt(401, message: 'Test not found')
+  end
+end
+
+private
+def json_halt(code, content)
+  halt code, { 'Content-Type' => 'application/json' }, JSON.dump(content)
 end
