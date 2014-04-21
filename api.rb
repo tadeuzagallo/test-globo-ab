@@ -8,7 +8,9 @@ $LOAD_PATH.concat(%w{./app/models ./app/serializers})
 require 'test'
 require 'user_choice_serializer'
 
-set :database, { adapter: 'sqlite3', database: 'db/development.sqlite3' }
+ENV['RACK_ENV'] ||= 'development'
+
+set :database, { adapter: 'sqlite3', database: "db/#{ENV['RACK_ENV']}.sqlite3" }
 
 post '/ab/:feature_name' do |feature_name|
   test = Test.new(name: feature_name)

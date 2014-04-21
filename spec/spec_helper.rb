@@ -1,3 +1,5 @@
+ENV['RACK_ENV'] ||= 'test'
+
 RSpec.configure do |config|
   require './api'
   require 'shoulda/matchers'
@@ -10,7 +12,6 @@ RSpec.configure do |config|
   I18n.enforce_available_locales = true
 
   Capybara.app = Sinatra::Application
-  Capybara.app.environment = :test
 
   FactoryGirl.definition_file_paths = %w{./spec/factories}
   FactoryGirl.find_definitions
