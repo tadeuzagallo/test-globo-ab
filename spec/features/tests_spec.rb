@@ -16,14 +16,18 @@ describe 'API', type: :feature do
     expect { post '/ab/feature_name', choices }.to change { Test.count() }.by(1)
   end
 
-  it 'should create an user\'s choice'  do
-    test = FactoryGirl.create(:test)
-    expect { get "/ab/#{test.name}/1" }.to change { UserChoice.count() }.by(1)
-  end
+  context 'get /ab/:feature_name/:user_id' do
+    before do
+      @test = FactoryGirl.create(:test)
+    end
 
-  it 'should save an user\'s choice' do
-    test = FactoryGirl.create(:test)
-    expect { get "/ab/#{test.name}/1" }.to change { UserChoice.count() }.by(1)
-    expect { get "/ab/#{test.name}/1" }.to change { UserChoice.count() }.by(0)
+    it 'should create an user\'s choice'  do
+      expect { get "/ab/#{@test.name}/1" }.to change { UserChoice.count() }.by(1)
+    end
+
+    it 'should save an user\'s choice' do
+      expect { get "/ab/#{@test.name}/1" }.to change { UserChoice.count() }.by(1)
+      expect { get "/ab/#{@test.name}/1" }.to change { UserChoice.count() }.by(0)
+    end
   end
 end
