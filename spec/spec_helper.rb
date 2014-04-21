@@ -7,11 +7,15 @@ RSpec.configure do |config|
   require 'capybara/rspec'
   require 'rack/test'
   require 'i18n'
+  require 'factory_girl'
 
   I18n.enforce_available_locales = true
 
   Capybara.app = Sinatra::Application
   Capybara.app.environment = :test
+
+  FactoryGirl.definition_file_paths = %w{./spec/factories}
+  FactoryGirl.find_definitions
 
   config.treat_symbols_as_metadata_keys_with_true_values = true
   config.run_all_when_everything_filtered = true

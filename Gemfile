@@ -12,7 +12,10 @@ group :development do
 end
 
 group :development, :test do
+  gem 'pry'
+  gem 'pry-debugger'
   gem 'rspec'
   gem 'capybara'
   gem 'shoulda-matchers'
+  gem 'factory_girl'
 end
