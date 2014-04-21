@@ -9,6 +9,7 @@ RSpec.configure do |config|
   require 'rack/test'
   require 'i18n'
   require 'factory_girl'
+  require 'database_cleaner'
 
   I18n.enforce_available_locales = true
 
@@ -23,4 +24,8 @@ RSpec.configure do |config|
   config.filter_run :focus
   config.order = 'random'
   config.include Capybara::DSL
+
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
 end
