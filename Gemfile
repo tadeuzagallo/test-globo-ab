@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'sinatra'
 gem 'activerecord', '~> 4.0.4'
 gem 'sinatra-activerecord'
+gem 'active_model_serializers'
 
 group :development do
   gem 'sqlite3'
