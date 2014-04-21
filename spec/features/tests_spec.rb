@@ -1,4 +1,5 @@
 require 'test'
+require 'user_choice'
 
 describe 'API', type: :feature do
   include Rack::Test::Methods
@@ -15,5 +16,8 @@ describe 'API', type: :feature do
     expect { post '/ab/feature_name', choices }.to change { Test.count() }.by(1)
   end
 
-  it 'should create '
+  it 'should create an user\'s choice'  do
+    test = FactoryGirl.create(:test)
+    expect { get "/ab/#{test.name}/1" }.to change { UserChoice.count() }.by(1)
+  end
 end
