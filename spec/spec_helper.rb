@@ -1,9 +1,5 @@
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..'))
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'app', 'models'))
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'app', 'serializers'))
-
 RSpec.configure do |config|
-  require 'api'
+  require './api'
   require 'shoulda/matchers'
   require 'capybara/rspec'
   require 'rack/test'

@@ -1,6 +1,10 @@
 require 'sinatra'
 require 'sinatra/activerecord'
 
+$LOAD_PATH.concat(%w{./app/models ./app/serializers})
+
+require 'test'
+
 set :database, { adapter: 'sqlite3', database: 'db/development.sqlite3' }
 
 post '/ab/:feature_name' do |feature_name|
