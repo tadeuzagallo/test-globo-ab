@@ -1,0 +1,21 @@
+table {
+  width: 100%;
+  border: none;
+}
+
+th, td {
+  margin: 0;
+  padding: 5px;
+}
+
+th {
+  text-align: left;
+}
+
+tr:nth-child(odd) {
+  background-color: #EEE;
+}
+
+tr:first-child {
+  background-color: #EEF;
+}
