@@ -10,7 +10,7 @@ describe 'API', type: :feature do
 
   before(:all) { Test.destroy_all }
   
-  it 'should create a new feature' do
+  it 'should create a new test' do
     test = FactoryGirl.build(:test, :with_choices)
     choices = test.choices.as_json(only: [:url, :weight])
     expect { post "/ab/#{test.name}", choices: choices }.to change { Test.count() }.by(1)
