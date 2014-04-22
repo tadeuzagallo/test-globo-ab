@@ -4,25 +4,17 @@ require 'user_choice'
 describe 'API', type: :feature do
   include Rack::Test::Methods
 
-  def app
-    Capybara.app
-  end
-
   before(:all) { Test.destroy_all }
   
   context 'post /ab/:feature_name' do
     it 'should create a new test' do
-      test = FactoryGirl.build(:test, :with_choices)
-      choices = test.choices.as_json(only: [:url, :weight])
-      expect { post "/ab/#{test.name}", choices: choices }.to change { Test.count() }.by(1)
+      create_new_feature(&:post)
     end
   end
 
   context 'put /ab/:feature_name' do
     it 'should create a test' do
-      test = FactoryGirl.build(:test, :with_choices)
-      choices = test.choices.as_json(only: [:url, :weight])
-      expect { put "/ab/#{test.name}", choices: choices }.to change { Test.count() }.by(1)
+      create_new_feature(&:put)
     end
 
     it 'should update an existing test' do
@@ -48,5 +40,17 @@ describe 'API', type: :feature do
       expect { get "/ab/#{@test.name}/1" }.to change { UserChoice.count() }.by(1)
       expect { get "/ab/#{@test.name}/1" }.to change { UserChoice.count() }.by(0)
     end
+  end
+
+  private
+
+  def create_new_feature(&method) 
+    test = FactoryGirl.build(:test, :with_choices)
+    choices = test.choices.as_json(only: [:url, :weight])
+    expect { method.call self, "/ab/#{test.name}", choices: choices }.to change { Test.count() }.by(1)
+  end
+
+  def app
+    Capybara.app
   end
 end
