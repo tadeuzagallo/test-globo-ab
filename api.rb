@@ -13,9 +13,21 @@ ENV['RACK_ENV'] ||= 'development'
 set :database, { adapter: 'sqlite3', database: "db/#{ENV['RACK_ENV']}.sqlite3" }
 
 post '/ab/:feature_name' do |feature_name|
+  params.symbolize_keys!
   test = Test.new(name: feature_name)
-  test.choices.build(params[:choices])
-  test.save
+  test.choices.build(params[:choices]) if params.key?(:choices)
+
+  if test.save
+    json message: 'Test created'
+  else
+    p test.errors.messages
+    p params
+    errors = test.errors.messages.values.reduce(&:merge)
+    json_halt 422, {
+      message: 'Invalid test',
+      errors: errors
+    }
+  end
 end
 
 get '/ab/:feature_name/:user_id' do |feature_name, user_id|

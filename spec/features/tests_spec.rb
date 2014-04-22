@@ -11,9 +11,9 @@ describe 'API', type: :feature do
   before(:all) { Test.destroy_all }
   
   it 'should create a new feature' do
-    choices = { choices: [{ url: 'http://foo.com', weight: 1 },
-                        { url: 'http://bar.com', weight: 1 }] }
-    expect { post '/ab/feature_name', choices }.to change { Test.count() }.by(1)
+    test = FactoryGirl.build(:test, :with_choices)
+    choices = test.choices.as_json(only: [:url, :weight])
+    expect { post "/ab/#{test.name}", choices: choices }.to change { Test.count() }.by(1)
   end
 
   context 'get /ab/:feature_name/:user_id' do
