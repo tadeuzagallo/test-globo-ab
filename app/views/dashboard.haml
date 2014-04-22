@@ -1,4 +1,22 @@
 !!!
 %html
   %head
+    %title A/B Tests
+    %link{ rel: :stylesheet, href: '/public/css/application.css' }
   %body
+    %h1 A/B Tests
+
+    %table
+      %tr
+        %th Name
+        %th A
+        %th #
+        %th B
+        %th #
+      - @tests.each do |test|
+        %tr
+          %td= test.name
+          - test.choices.each do |choice|
+            %td= choice.url
+            %td= choice.users_choices.count
+

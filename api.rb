@@ -58,7 +58,7 @@ end
 
 set :views, proc { './app/views' }
 get '/ab/dashboard' do
-  @tests = Test.includes(:choices => :users_choices).all
+  @tests = Test.includes(:choices)
   haml :dashboard, format: :html5
 end
 

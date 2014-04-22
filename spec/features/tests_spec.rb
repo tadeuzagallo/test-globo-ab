@@ -42,6 +42,15 @@ describe 'API', type: :feature do
     end
   end
 
+  context 'get /ab/dashboard' do
+    it 'should list the tests' do
+      test = FactoryGirl.create(:test, :with_choices)
+      visit '/ab/dashboard'
+
+      page.should have_content(test.name)
+    end
+  end
+
   private
 
   def create_new_feature(&method) 
