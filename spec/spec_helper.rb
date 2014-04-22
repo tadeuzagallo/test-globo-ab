@@ -16,12 +16,13 @@ RSpec.configure do |config|
   FactoryGirl.definition_file_paths = %w{./spec/factories}
   FactoryGirl.find_definitions
 
+  ActiveRecord::Base.logger = nil
+
   config.treat_symbols_as_metadata_keys_with_true_values = true
   config.run_all_when_everything_filtered = true
   config.filter_run :focus
   config.order = 'random'
   config.include Capybara::DSL
-
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
   end
