@@ -20,8 +20,22 @@ post '/ab/:feature_name' do |feature_name|
   if test.save
     json message: 'Test created'
   else
-    p test.errors.messages
-    p params
+    errors = test.errors.messages.values.reduce(&:merge)
+    json_halt 422, {
+      message: 'Invalid test',
+      errors: errors
+    }
+  end
+end
+
+put '/ab/:feature_name' do |feature_name|
+  params.symbolize_keys!
+  test = Test.find_or_create_by(name: feature_name)
+  test.choices = []
+  test.choices.build(params[:choices]) if params.key?(:choices)
+  if test.save
+    json message: 'Test updated'
+  else
     errors = test.errors.messages.values.reduce(&:merge)
     json_halt 422, {
       message: 'Invalid test',

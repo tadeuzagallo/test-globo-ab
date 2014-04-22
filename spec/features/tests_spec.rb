@@ -16,6 +16,15 @@ describe 'API', type: :feature do
     expect { post "/ab/#{test.name}", choices: choices }.to change { Test.count() }.by(1)
   end
 
+  it 'should update a test' do
+    test = FactoryGirl.create(:test, :with_choices)
+    choices = 2.times.map { FactoryGirl.build(:choice).as_json(only: [:url, :weight]) }
+    put "/ab/#{test.name}", choices: choices
+
+    test.reload
+    test.choices.first.url.should == choices.first['url']
+  end
+
   context 'get /ab/:feature_name/:user_id' do
     before do
       @test = FactoryGirl.create(:test, :with_choices)
