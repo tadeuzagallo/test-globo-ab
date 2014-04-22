@@ -56,6 +56,12 @@ get '/ab/:feature_name/:user_id' do |feature_name, user_id|
   end
 end
 
+set :views, proc { './app/views' }
+get '/ab/dashboard' do
+  @tests = Test.includes(:choices => :users_choices).all
+  haml :dashboard, format: :html5
+end
+
 private
 def json_halt(code, content)
   halt code, { 'Content-Type' => 'application/json' }, JSON.dump(content)
