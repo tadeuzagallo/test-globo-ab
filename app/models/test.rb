@@ -16,7 +16,8 @@ class Test < ActiveRecord::Base
 
   def choose_for_user(user_id)
     weight = self.choices.reduce(0) { |a, b| a + b.weight}
-    choice = self.choices.find do |c|
+    weight = 1 + rand(weight)
+    choice = self.choices.detect do |c|
       weight -= c.weight
       weight <= 0
     end
