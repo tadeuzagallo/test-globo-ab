@@ -53,7 +53,7 @@ put '/ab/:feature_name' do |feature_name|
 end
 
 get '/ab/:feature_name/:user_id' do |feature_name, user_id|
-  test = Test.includes(:choices).find_by(name: feature_name)
+  test = Test.includes(:choices, :users_choices).find_by(name: feature_name)
   if test.present?
     user_choice = test.users_choices.find_by(user_id: user_id) ||
     test.choose_for_user(user_id)
