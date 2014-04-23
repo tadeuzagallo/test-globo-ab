@@ -67,6 +67,8 @@ end
 set :views, proc { './app/views' }
 get '/ab/dashboard' do
   @tests = Test.includes(:choices)
+  @users_choices_count = UserChoice.count(group: :choice_id)
+                                    
   haml :dashboard, format: :html5
 end
 

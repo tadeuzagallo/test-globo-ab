@@ -18,5 +18,5 @@
           %td= test.name
           - test.choices.each do |choice|
             %td= choice.url
-            %td= choice.users_choices.count
+            %td= @users_choices_count[choice.id] || 0
 
