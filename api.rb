@@ -12,6 +12,14 @@ ENV['RACK_ENV'] ||= 'development'
 
 set :database, { adapter: 'sqlite3', database: "db/#{ENV['RACK_ENV']}.sqlite3" }
 
+before do
+  headers['Access-Control-Allow-Origin'] = '*'
+  headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, OPTIONS'
+  headers['Access-Control-Allow-Headers'] ='accept, content-type'
+end
+
+options '/*' do;end
+
 post '/ab/:feature_name' do |feature_name|
   params.symbolize_keys!
   test = Test.new(name: feature_name)
